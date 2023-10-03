@@ -1,17 +1,18 @@
 # Use uma imagem Node.js como base
-FROM node:14
+FROM node:16
 
-# Defina o diretório de trabalho
-WORKDIR /app
+# Defina o diretório de trabalho no container
+WORKDIR /user/app
 
-# Copie o package.json e o package-lock.json
-COPY package*.json ./
+COPY package.json ./
 
 # Instale as dependências
 RUN npm install
 
-# Copie o restante dos arquivos do projeto
+# Copie os arquivos do projeto para o diretório de trabalho
 COPY . .
 
-# Comando para iniciar o aplicativo
-CMD [ "npm", "run", "serve" ]
+EXPOSE 8080
+
+# Comando para executar o aplicativo
+CMD ["npm", "run", "serve"]
